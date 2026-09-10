@@ -1,8 +1,6 @@
 @_exported public import Magnitude
 @_exported public import Angle
 
-/// A circular boundary interval in a plane supplied by the interpreting domain.
-/// Center, radius and directed angular interval constitute its parameterization.
 public struct Arc<Point, Radius: Magnitude::Scalar, Angular: BinaryFloatingPoint> {
     public var center: Point
     public var radius: Magnitude<Radius>
