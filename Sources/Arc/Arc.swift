@@ -11,7 +11,9 @@ public struct Arc<Point, Radius: Magnitude::Scalar, Angular: BinaryFloatingPoint
         self.radius = radius
         self.interval = interval
     }
+}
 
+extension Arc {
     public func reversed() throws(Angle.Sweep<Angular>.Error) -> Self {
         Self(center: center, radius: radius, interval: try interval.reversed())
     }
