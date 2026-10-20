@@ -1,5 +1,5 @@
-@_exported public import Magnitude
 @_exported public import Angle
+@_exported public import Magnitude
 
 public struct Arc<Point, Radius: Magnitude::Scalar, Angular: BinaryFloatingPoint> {
     public var center: Point
@@ -23,6 +23,6 @@ extension Arc: Equatable where Point: Equatable {}
 extension Arc: Hashable where Point: Hashable, Radius: Hashable, Angular: Hashable {}
 extension Arc: Sendable where Point: Sendable, Radius: Sendable, Angular: Sendable {}
 #if !hasFeature(Embedded)
-extension Arc: Encodable where Point: Encodable, Radius: Encodable, Angular: Encodable {}
-extension Arc: Decodable where Point: Decodable, Radius: Decodable, Angular: Decodable {}
+    extension Arc: Encodable where Point: Encodable, Radius: Encodable, Angular: Encodable {}
+    extension Arc: Decodable where Point: Decodable, Radius: Decodable, Angular: Decodable {}
 #endif

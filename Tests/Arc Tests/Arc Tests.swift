@@ -1,10 +1,13 @@
 import Arc
-import Testing
 import Foundation
+import Testing
 
 @Suite struct `Circular arc constituents` {
     @Test func `Reversal retains center radius and signed interval`() throws {
-        let interval = try Angle.Sweep<Double>(start: Radian(_unchecked: 1), amount: Radian(_unchecked: -2))
+        let interval = try Angle.Sweep<Double>(
+            start: Radian(_unchecked: 1),
+            amount: Radian(_unchecked: -2)
+        )
         let arc = Arc(center: "origin", radius: try Magnitude(validating: 3), interval: interval)
         let reversed = try arc.reversed()
         #expect(reversed.center == arc.center)
@@ -19,12 +22,20 @@ import Foundation
         #expect(Set([arc, arc]).count == 1)
     }
     @Test func `Coding validates radius and angular interval`() throws {
-        let arc = Arc(center: 1, radius: try Magnitude(validating: 2),
-                      interval: try Angle.Sweep<Double>(start: .zero, amount: .pi.half))
-        #expect(try JSONDecoder().decode(Arc<Int, Int, Double>.self, from: JSONEncoder().encode(arc)) == arc)
+        let arc = Arc(
+            center: 1,
+            radius: try Magnitude(validating: 2),
+            interval: try Angle.Sweep<Double>(start: .zero, amount: .pi.half)
+        )
+        #expect(
+            try JSONDecoder().decode(Arc<Int, Int, Double>.self, from: JSONEncoder().encode(arc))
+                == arc
+        )
         #expect(throws: DecodingError.self) {
-            try JSONDecoder().decode(Arc<Int, Int, Double>.self,
-                from: Data(#"{"center":1,"radius":-1,"interval":{"start":0,"amount":1}}"#.utf8))
+            try JSONDecoder().decode(
+                Arc<Int, Int, Double>.self,
+                from: Data(#"{"center":1,"radius":-1,"interval":{"start":0,"amount":1}}"#.utf8)
+            )
         }
     }
 }
